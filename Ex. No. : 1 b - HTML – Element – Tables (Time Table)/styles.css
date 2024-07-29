@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    font-size: 1em;
+}
+
+.red-text {
+    color: red;
+}
+
+thead th[colspan="10"] {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
