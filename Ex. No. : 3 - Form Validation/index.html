@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Course Registration Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="brand-title">Course Application Portal</div>
+        <div class="inputs">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <span class="error" id="name-error"></span>
+
+            <label for="regno">Register No:</label>
+            <input type="text" id="regno" name="regno">
+            <span class="error" id="regno-error"></span>
+
+            <label for="year">Year:</label>
+            <select id="year" name="year">
+                <option value="">Select Year</option>
+                <option value="1st year">1st year</option>
+                <option value="2nd year">2nd year</option>
+                <option value="3rd year">3rd year</option>
+                <option value="4th year">4th year</option>
+            </select>
+            <span class="error" id="year-error"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="email-error"></span>
+
+            <label for="sem">Semester:</label>
+            <select id="sem" name="semester">
+                <option value="">Select Semester</option>
+                <option value="sem1">sem1</option>
+                <option value="sem2">sem2</option>
+                <option value="sem3">sem3</option>
+                <option value="sem4">sem4</option>
+                <option value="sem5">sem5</option>
+                <option value="sem6">sem6</option>
+                <option value="sem7">sem7</option>
+                <option value="sem8">sem8</option>
+            </select>
+            <span class="error" id="sem-error"></span>
+
+            <label for="core">Core/OE/PE:</label>
+            <select id="core" name="core/oe/pe">
+                <option value="">Select Category</option>
+                <option value="core">Core</option>
+                <option value="oe">OE</option>
+                <option value="pe">PE</option>
+            </select>
+            <span class="error" id="core-error"></span>
+
+            <label for="subcode">Subject Code:</label>
+            <input type="text" id="subcode" name="subject-code" required pattern="[A-Za-z0-9]+">
+            <span class="error" id="subcode-error"></span>
+
+            <label for="subname">Subject Name:</label>
+            <input type="text" id="subname" name="subject-name">
+            <span class="error" id="subname-error"></span>
+
+            <label for="credit">Credit:</label>
+            <input type="text" id="credit" name="credit">
+            <span class="error" id="credit-error"></span>
+
+            <label for="contact">Phone No:</label>
+            <input type="text" id="contact" name="contact">
+            <span class="error" id="contact-error"></span>
+
+            <label for="gender">Gender:</label>
+            <div class="gender-selection">
+                <div class="gender-option">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            <span class="error" id="gender-error"></span>
+
+            <label for="dept">Department:</label>
+            <select id="dept" name="department">
+                <option value="">Select Dept.</option>
+                <option value="CSE">CSE</option>
+                <option value="EEE">EEE</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+                <option value="AIML">AIML</option>
+                <option value="AI&DS">AI&DS</option>
+            </select>
+            <span class="error" id="dept-error"></span>
+
+            <button id="submit" onclick="return validateForm()">Submit</button>
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var regno = document.getElementById("regno").value;
+            var year = document.getElementById("year").value;
+            var email = document.getElementById("email").value;
+            var sem = document.getElementById("sem").value;
+            var core = document.getElementById("core").value;
+            var subcode = document.getElementById("subcode").value;
+            var subname = document.getElementById("subname").value;
+            var credit = document.getElementById("credit").value;
+            var contact = document.getElementById("contact").value;
+            var gender = document.querySelector('input[name="gender"]:checked'); 
+            var dept = document.getElementById("dept").value;   
+
+            var name_error = document.getElementById("name-error");
+            var regno_error = document.getElementById("regno-error");
+            var year_error = document.getElementById("year-error");
+            var email_error = document.getElementById("email-error");
+            var sem_error = document.getElementById("sem-error");
+            var core_error = document.getElementById("core-error");
+            var subcode_error = document.getElementById("subcode-error");
+            var subname_error = document.getElementById("subname-error");
+            var credit_error = document.getElementById("credit-error");
+            var contact_error = document.getElementById("contact-error");
+            var gender_error = document.getElementById("gender-error"); 
+            var dept_error = document.getElementById("dept-error");
+
+            name_error.innerHTML = "";
+            regno_error.innerHTML = "";
+            year_error.innerHTML = "";
+            email_error.innerHTML = "";
+            sem_error.innerHTML = "";
+            core_error.innerHTML = "";
+            subcode_error.innerHTML = "";
+            subname_error.innerHTML = "";
+            credit_error.innerHTML = "";
+            contact_error.innerHTML = "";
+            gender_error.innerHTML = "";
+            dept_error.innerHTML = "";
+
+            const emailReg = /^([\w-]+(\.[\w-]+)*)@([\w-]+)\.([a-zA-Z]{2,})(\.[a-zA-Z]{2,})?$/;
+            const PEReg = /^[A-Za-z]{2}[0-9]{2}[A-Za-z][0-9]{2}$/;
+            const CReg = /^[a-zA-Z]{2}[0-9]{5}$/;
+            const OEReg = /^[a-zA-Z]{2}[a-zA-Z\d]{5}$/;
+
+            var isvalid = true;
+
+            if (name === "") {
+                name_error.innerHTML = "Name is required.";
+                document.getElementById("name").focus();
+                isvalid = false;
+            }
+            if (regno === "") {
+                regno_error.innerHTML = "Register No. is required.";
+                if (isvalid) document.getElementById("regno").focus();
+                isvalid = false;
+            } else if (/^[0-9]{9}$/.test(regno) === false) {
+                regno_error.innerHTML = "Please enter a valid Register No.";
+                if (isvalid) document.getElementById("regno").focus();
+                isvalid = false;
+            }
+            if (year === "") {
+                year_error.innerHTML = "Select Year";
+                if (isvalid) document.getElementById("year").focus();
+                isvalid = false;
+            }
+
+            if (email === "" || !emailReg.test(email)) {
+                email_error.innerHTML = "Please enter a valid Email Address.";
+                if (isvalid) document.getElementById("email").focus();
+                isvalid = false;
+            }
+            if (sem === "") {
+                sem_error.innerHTML = "Select Semester";
+                if (isvalid) document.getElementById("sem").focus();
+                isvalid = false;
+            }
+            if (core === "") {
+                core_error.innerHTML = "Select Category";
+                if (isvalid) document.getElementById("core").focus();
+                isvalid = false;
+            }
+            if (subcode === "" || (core === "pe" && !PEReg.test(subcode)) || (core === "core" && !CReg.test(subcode)) || (core === "oe" && !OEReg.test(subcode))) {
+                subcode_error.innerHTML = "Please enter a valid Subject Code.";
+                if (isvalid) document.getElementById("subcode").focus();
+                isvalid = false;
+            }
+            if (subname === "") {
+                subname_error.innerHTML = "Course Name is required.";
+                if (isvalid) document.getElementById("subname").focus();
+                isvalid = false;
+            }
+            if (credit === "" || /^[2-5]$/.test(credit) == false) {
+                credit_error.innerHTML = "Please enter a valid Credit Point (2-5).";
+                if (isvalid) document.getElementById("credit").focus();
+                isvalid = false;
+            }
+            if (contact === "" || /^[0-9]{10}$/.test(contact) === false) {
+                contact_error.innerHTML = "Please enter a valid Contact Number.";
+                if (isvalid) document.getElementById("contact").focus();
+                isvalid = false;
+            }
+            if (!gender) {
+                gender_error.innerHTML = "Please select your gender.";
+                if (isvalid) document.querySelector('input[name="gender"]').focus();
+                isvalid = false;
+            }
+            if (dept === "") {
+                dept_error.innerHTML = "Select Dept.";
+                if (isvalid) document.getElementById("dept").focus();
+                isvalid = false;
+            }
+            return isvalid;
+        }
+    </script>
+</body>
+</html>
