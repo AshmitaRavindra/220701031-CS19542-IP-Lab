@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple XMLHttpRequest</title>
+
+    <script>
+        function loadXMLDoc(){
+            const xhr= new XMLHttpRequest();
+            xhr.open("GET","rec.txt",true);
+            xhr.onreadystatechange= function(){
+                if(this.readyState==4 && this.status==200)
+                    {document.getElementById("content").innerHTML=this.responseText;}
+            }
+            xhr.send();
+        }
+    </script>
+
+</head>
+<body>
+    <h2>Click the button to see the content of rec.txt file</h2>
+    <div id="content"></div>
+    <button onclick="loadXMLDoc()">Load Content</button>
+</body>
+</html>
