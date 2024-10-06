@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Name Suggestion</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('name').addEventListener('input', function() {
+                var query = this.value; 
+                var xhr = new XMLHttpRequest();
+                var params = new URLSearchParams();
+                params.append('name', query);
+                xhr.open('GET', 'StudentServlet?' + params.toString(), true); 
+                xhr.onreadystatechange = function() {
+                     if (this.readyState === 4 && this.status === 200) {
+                      document.getElementById("suggestions").innerHTML = this.responseText; 
+                 }
+              };
+                xhr.send(); 
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Search Student Name</h1>
+    <input type="text" id="name" />
+    <div id="suggestions"></div>
+</body>
+</html>
+<!--  addEventListener method in js is used to add a specific event on DOM 
+this allows us to execute code in response to user actions such as keyboard input ,mouse clicks etc,
+DOMContentLoaded is used to ensure that js code runs only after html page loades
+next line is to trigger when we enter name in the input box...this triggers the fn
+XMLHttpRequest is created to handle ajax request to server
+ajax request means ajax is used to run without refreshing the page
+get method is used to retrive data from server 
+var params=new URLSearchParams() this would create a new object URLSearchParams 
+params.append('name' , query) this will add the key-value pair to the params
+params.toString() is used to convert into string format 
+-->
